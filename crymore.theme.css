@@ -1,0 +1,521 @@
+/**
+ * @name crymore
+ * @author crymore.vip
+ * @version 2.0.0
+ * @description Discord in the crymore.vip look: black and neutral greys, faint grid, Google Sans, cyan only where the site uses it.
+ * @website https://crymore.vip
+ */
+
+/* credits: @.alexq1. on discord */
+
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&family=Google+Sans+Code:wght@400..600&display=swap");
+
+/* ---- tokens: the crymore.vip palette (packages/ui theme.css) ---- */
+:root {
+  --cm-bg: #0c0c0c;
+  --cm-surface: #131313;
+  --cm-raised: #1d1d1d;
+  --cm-overlay: #252525;
+  --cm-border: #2a2a2e;
+  --cm-border-strong: #3b3b42;
+  --cm-fg: #fff;
+  --cm-text: #e6e6e6;
+  --cm-muted: #9e9696;
+  --cm-dim: #77777c;
+  --cm-primary: #2dc6ff;
+  --cm-primary-hover: #5ad3ff;
+  --cm-on-primary: #0c0c0c;
+  --cm-success: #22c55e;
+  --cm-warning: #ffe524;
+  --cm-danger: #eb4034;
+  --cm-hover: rgb(255 255 255 / 0.035);
+  --cm-active: rgb(255 255 255 / 0.06);
+  --cm-grid: rgb(255 255 255 / 0.035); /* the site's hero grid; transparent = off */
+  --cm-spot: rgb(255 255 255 / 0.06); /* the site's top spotlight; transparent = off */
+  --cm-sans: "Google Sans", "Google Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --cm-mono: "Google Sans Code", "Google Sans Code Variable", ui-monospace, Consolas, monospace;
+}
+
+/* ---- Discord's variables -> tokens. Profiles with their own Nitro theme keep it. ---- */
+body,
+.theme-dark:not(.custom-user-profile-theme),
+.theme-darker:not(.custom-user-profile-theme),
+.theme-midnight:not(.custom-user-profile-theme),
+.theme-light:not(.custom-user-profile-theme) {
+  --font-primary: var(--cm-sans);
+  --font-display: var(--cm-sans);
+  --font-headline: var(--cm-sans);
+  --font-code: var(--cm-mono);
+
+  --app-frame-background: var(--cm-bg);
+  --app-frame-border: var(--cm-border);
+  --background-base-lowest: var(--cm-bg);
+  --background-base-lower: var(--cm-bg);
+  --background-base-low: var(--cm-surface);
+  --background-surface-high: var(--cm-surface);
+  --background-surface-higher: var(--cm-raised);
+  --background-surface-highest: var(--cm-raised);
+  --background-mod-subtle: var(--cm-hover);
+  --background-mod-normal: var(--cm-raised);
+  --background-mod-strong: var(--cm-overlay);
+  --background-brand: var(--cm-raised); /* no big cyan squares (home, add server) */
+  --background-primary: var(--cm-bg);
+  --background-secondary: var(--cm-surface);
+  --background-floating: var(--cm-surface);
+  --background-code: var(--cm-surface);
+  --background-scrim: rgb(0 0 0 / 0.75);
+  --background-feedback-critical: rgb(235 64 52 / 0.08);
+  --background-feedback-warning: rgb(255 229 36 / 0.06);
+  --background-feedback-positive: rgb(34 197 94 / 0.08);
+  --background-feedback-notification: var(--cm-danger);
+  --bg-surface-raised: var(--cm-surface);
+  --chat-background-default: var(--cm-bg);
+  --channeltextarea-background: var(--cm-surface);
+  --home-background: var(--cm-bg);
+  --modal-background: var(--cm-surface);
+  --modal-footer-background: var(--cm-surface);
+  --card-background-default: var(--cm-surface);
+  --user-profile-overlay-background: var(--cm-surface);
+  --user-profile-toolbar-background: var(--cm-raised);
+  --user-profile-border: var(--cm-border);
+  --embed-background: var(--cm-surface);
+
+  --text-default: var(--cm-text);
+  --text-strong: var(--cm-fg);
+  --text-subtle: var(--cm-muted);
+  --text-muted: var(--cm-dim);
+  --text-link: var(--cm-primary);
+  --text-brand: var(--cm-primary);
+  --text-feedback-info: var(--cm-primary);
+  --text-feedback-positive: var(--cm-success);
+  --text-feedback-warning: var(--cm-warning);
+  --text-feedback-critical: var(--cm-danger);
+  --header-primary: var(--cm-fg);
+  --header-secondary: var(--cm-muted);
+  --channels-default: var(--cm-dim);
+  --channel-icon: var(--cm-dim);
+  --channel-text-area-placeholder: var(--cm-dim);
+  --chat-text-muted: var(--cm-dim);
+  --textbox-markdown-syntax: var(--cm-dim);
+
+  --interactive-text-default: var(--cm-dim);
+  --interactive-text-hover: var(--cm-text);
+  --interactive-text-active: var(--cm-fg);
+  --interactive-icon-default: var(--cm-dim);
+  --interactive-icon-hover: var(--cm-text);
+  --interactive-icon-active: var(--cm-fg);
+  --interactive-muted: #45454a;
+  --interactive-background-hover: var(--cm-hover);
+  --interactive-background-active: var(--cm-active);
+  --interactive-background-selected: var(--cm-raised);
+  --icon-default: var(--cm-muted);
+  --icon-subtle: var(--cm-dim);
+  --icon-muted: var(--cm-dim);
+  --icon-strong: var(--cm-fg);
+
+  --border-subtle: var(--cm-border);
+  --border-muted: var(--cm-border);
+  --border-normal: var(--cm-border);
+  --border-strong: var(--cm-border-strong);
+  --border-focus: var(--cm-primary);
+  --focus-primary: var(--cm-primary);
+
+  --brand-360: var(--cm-primary);
+  --brand-500: var(--cm-primary);
+  /* Discord's blurple palette: solid shades -> cyan, the translucent tints -> white tints (no purple anywhere) */
+  --blurple-26: var(--cm-primary);
+  --blurple-50: var(--cm-primary);
+  --blurple-60: var(--cm-primary-hover);
+  --blurple-65: var(--cm-primary-hover);
+  --blurple-50-hsl: 196 100% 59%;
+  --opacity-blurple-8-hsl: 0 0% 100%;
+  --opacity-blurple-12-hsl: 0 0% 100%;
+  --opacity-blurple-16-hsl: 0 0% 100%;
+  --opacity-blurple-24-hsl: 0 0% 100%;
+  --interactive-accent-background-hover: var(--cm-hover);
+  --interactive-accent-background-active: var(--cm-active);
+  --interactive-accent-background-selected: var(--cm-raised);
+  --togglebutton-background-selected: var(--cm-raised);
+  --togglebutton-background-selected-hover: var(--cm-overlay);
+  --togglebutton-border-selected: var(--cm-border-strong);
+  --tabs-indicator-default: var(--cm-primary);
+  --icon-brand: var(--cm-primary);
+  --badge-primary-background: var(--cm-raised);
+  --badge-primary-border: var(--cm-border);
+  --switch-thumb-icon-active: var(--cm-raised);
+  --control-brand-foreground: var(--cm-primary);
+  --control-brand-foreground-new: var(--cm-primary);
+
+  /* buttons: cyan primary with dark text, raised secondary with a border, red critical */
+  --control-primary-background-default: var(--cm-primary);
+  --control-primary-background-hover: var(--cm-primary-hover);
+  --control-primary-background-active: var(--cm-primary-hover);
+  --control-primary-border-default: transparent;
+  --control-primary-text-default: var(--cm-on-primary);
+  --control-primary-text-hover: var(--cm-on-primary);
+  --control-primary-icon-default: var(--cm-on-primary);
+  --control-primary-icon-hover: var(--cm-on-primary);
+  --control-secondary-background-default: var(--cm-raised);
+  --control-secondary-background-hover: var(--cm-overlay);
+  --control-secondary-border-default: var(--cm-border);
+  --control-secondary-border-hover: var(--cm-border-strong);
+  --control-secondary-border-active: var(--cm-border-strong);
+  --control-secondary-text-default: var(--cm-fg);
+  --control-secondary-text-hover: var(--cm-fg);
+  --control-secondary-icon-default: var(--cm-fg);
+  --control-secondary-icon-hover: var(--cm-fg);
+  --control-critical-primary-background-default: var(--cm-danger);
+  --control-critical-primary-background-hover: #f0574c;
+  --control-critical-primary-background-active: #f0574c;
+  --control-critical-secondary-background-default: var(--cm-raised);
+  --control-critical-secondary-background-hover: var(--cm-overlay);
+  --control-critical-secondary-border-default: rgb(235 64 52 / 0.5);
+  --control-critical-secondary-text-default: var(--cm-danger);
+  --control-critical-secondary-icon-default: var(--cm-danger);
+  --control-connect-background-default: var(--cm-success);
+  --control-connect-background-hover: #3dd171;
+  --control-connect-background-active: #3dd171;
+  --control-connect-text-default: var(--cm-on-primary);
+  --control-connect-icon-default: var(--cm-on-primary);
+  --control-icon-only-background-hover: var(--cm-hover);
+  --button-filled-brand-background: var(--cm-primary);
+  --button-filled-brand-text: var(--cm-on-primary);
+  --button-secondary-background: var(--cm-raised);
+  --redesign-button-secondary-background: var(--cm-raised);
+  --redesign-button-secondary-text: var(--cm-fg);
+
+  /* switches, checkboxes, radios: the site's Switch / Checkbox (cyan knob + border, never a cyan fill) */
+  --switch-background-default: var(--cm-raised);
+  --switch-background-selected-default: var(--cm-raised);
+  --switch-background-selected-hover: var(--cm-raised);
+  --switch-border-default: var(--cm-border-strong);
+  --switch-border-hover: var(--cm-dim);
+  --switch-border-selected-default: var(--cm-primary);
+  --switch-border-selected-hover: var(--cm-primary-hover);
+  --switch-thumb-background-default: var(--cm-dim);
+  --switch-thumb-background-selected-default: var(--cm-primary);
+  --checkbox-background-default: var(--cm-surface);
+  --checkbox-background-selected-default: var(--cm-surface);
+  --checkbox-border-default: var(--cm-border-strong);
+  --checkbox-border-hover: var(--cm-dim);
+  --checkbox-border-selected-default: var(--cm-primary);
+  --checkbox-border-selected-hover: var(--cm-primary-hover);
+  --checkbox-icon-active: var(--cm-primary);
+  --radio-background-default: var(--cm-surface);
+  --radio-background-selected-default: var(--cm-surface);
+  --radio-border-default: var(--cm-border-strong);
+  --radio-border-hover: var(--cm-dim);
+  --radio-border-selected-default: var(--cm-primary);
+  --radio-border-selected-hover: var(--cm-primary-hover);
+  --radio-thumb-background-active: var(--cm-primary);
+  --slider-track-background: var(--cm-overlay);
+  --progressbar-track-background: var(--cm-overlay);
+  --progressbar-indicator-background: var(--cm-primary);
+
+  --input-background-default: var(--cm-surface);
+  --input-border-default: var(--cm-border);
+  --input-border-hover: var(--cm-border-strong);
+  --input-border-active: var(--cm-primary);
+  --input-text-default: var(--cm-fg);
+  --input-placeholder-text-default: var(--cm-dim);
+
+  /* messages */
+  --message-background-hover: rgb(255 255 255 / 0.02);
+  --message-highlight-background-default: linear-gradient(90deg, rgb(255 255 255 / 0.05), transparent 60%);
+  --message-highlight-background-hover: linear-gradient(90deg, rgb(255 255 255 / 0.07), transparent 60%);
+  --message-mentioned-background-default: linear-gradient(90deg, rgb(255 229 36 / 0.07), transparent 60%);
+  --message-mentioned-background-hover: linear-gradient(90deg, rgb(255 229 36 / 0.1), transparent 60%);
+  --mention-foreground: var(--cm-primary);
+  --mention-background: rgb(255 255 255 / 0.07);
+  --reaction-background-default: var(--cm-surface);
+  --reaction-background-hover: var(--cm-raised);
+  --reaction-background-active: var(--cm-raised);
+  --reaction-background-reacted-default: var(--cm-surface);
+  --reaction-background-reacted-hover: var(--cm-raised);
+  --reaction-border-default: var(--cm-border);
+  --reaction-border-hover: var(--cm-border-strong);
+  --reaction-border-reacted-default: var(--cm-primary);
+  --reaction-text-default: var(--cm-muted);
+  --reaction-text-hover: var(--cm-fg);
+  --reaction-text-reacted-default: var(--cm-primary);
+
+  /* badges: the site's Badge (raised pill, coloured text); unread counts stay red */
+  --badge-background-default: var(--cm-raised);
+  --badge-text-default: var(--cm-primary);
+  --badge-notification-background: var(--cm-danger);
+
+  --status-online: var(--cm-success);
+  --status-idle: var(--cm-warning);
+  --status-dnd: var(--cm-danger);
+  --status-offline: var(--cm-dim);
+  --status-positive: var(--cm-success);
+  --status-warning: var(--cm-warning);
+  --status-danger: var(--cm-danger);
+  --status-speaking: var(--cm-success);
+
+  --scrollbar-thin-thumb: var(--cm-overlay);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: var(--cm-overlay);
+  --scrollbar-auto-track: transparent;
+}
+
+::selection {
+  background: var(--cm-primary);
+  color: var(--cm-on-primary);
+}
+
+[role="textbox"] {
+  caret-color: var(--cm-primary);
+}
+
+/* ---- title bar: the crymore.vip wordmark (white "crymore", cyan ".vip"; 3.94em = width of "crymore")
+   in place of the back/forward arrows (mouse buttons and Alt+arrows still go back/forward) ---- */
+.bar_3zSH5d .backForwardButtons_nS9Yqn {
+  display: none;
+}
+
+.bar_3zSH5d::before {
+  content: "crymore.vip";
+  position: absolute;
+  top: 0;
+  left: 14px;
+  height: var(--custom-app-top-bar-height, 32px);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  font: 700 14px/1 var(--cm-sans);
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--cm-fg) 3.94em, var(--cm-primary) 3.94em);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+}
+
+.title_3zSH5d {
+  color: var(--cm-dim);
+  font-weight: 500;
+}
+
+/* ---- chat: black with the site's hero grid + spotlight fading out at the top ---- */
+.chatContent_z_gUBg {
+  background:
+    radial-gradient(ellipse 70% 260px at 50% 0, var(--cm-spot), transparent 70%),
+    linear-gradient(transparent, var(--cm-bg) 300px),
+    linear-gradient(90deg, var(--cm-grid) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(var(--cm-grid) 1px, transparent 1px) 0 0 / 56px 56px,
+    var(--cm-bg) !important;
+}
+
+.messagesWrapper_8AE1Qq,
+.scroller_8AE1Qq,
+.wrapper_oQjLgZ {
+  background: transparent !important;
+}
+
+.title_z_gUBg h1,
+.title_z_gUBg h2 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* timestamps in the mono font, like keys and roles on the dashboard */
+time {
+  font-family: var(--cm-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0;
+}
+
+/* composer: one field (the inner layer had its own background + corners, that was the double frame) */
+.channelTextArea_z_gUBg {
+  background: var(--cm-surface);
+  border: 1px solid var(--cm-border);
+  border-radius: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.channelTextArea_z_gUBg:hover {
+  border-color: var(--cm-border-strong);
+}
+
+.channelTextArea_z_gUBg:focus-within {
+  border-color: var(--cm-primary);
+}
+
+.form_z_gUBg .themedBackground_2x8-Qn,
+.attachWrapper_7TM4SO {
+  background: none !important;
+  border: 0 !important;
+}
+
+/* mention pill: cyan text; hover stays cyan instead of Discord's blurple fill */
+.mention {
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.mention.interactive:hover {
+  background: rgb(255 255 255 / 0.12) !important;
+  color: var(--cm-primary-hover) !important;
+}
+
+/* highlighted / mentioned / reply-to-you messages: a 2px edge like the site's Notice */
+.message_SY_P2T.mentioned_SY_P2T::before,
+.replying_SY_P2T::before {
+  width: 2px;
+  background: var(--cm-warning);
+}
+
+.replying_SY_P2T::before {
+  background: var(--cm-primary);
+}
+
+/* code */
+code.inline {
+  background: var(--cm-raised) !important;
+  border: 1px solid var(--cm-border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+.hljs {
+  border: 1px solid var(--cm-border) !important;
+  border-radius: 8px;
+}
+
+/* embeds: card with the embed's colour kept on the left edge only */
+.embedFull_XyW1ZT {
+  background: var(--cm-surface) !important;
+  border: 1px solid var(--cm-border);
+  border-left-width: 3px;
+  border-top-color: var(--cm-border) !important;
+  border-right-color: var(--cm-border) !important;
+  border-bottom-color: var(--cm-border) !important;
+  border-radius: 8px;
+}
+
+/* ---- lists: eyebrow headers like the site's "• PRODUCTS" ---- */
+li[class*="containerDefault_"] h3,
+.header_6zZYhF,
+.membersGroup_86es0b {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cm-dim);
+}
+
+.header_6zZYhF::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 8px 2px 0;
+  border-radius: 50%;
+  background: var(--cm-primary);
+  vertical-align: middle;
+}
+
+/* server name */
+.name_XH4OpX {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* channel rows + settings rows: the dashboard nav (8px, raised + white when selected) */
+.wrapper_TNyK-N .link_TNyK-N,
+.side_6zZYhF .item_6zZYhF {
+  border-radius: 8px;
+}
+
+.modeSelected_TNyK-N .link_TNyK-N,
+.side_6zZYhF .item_6zZYhF.selected_6zZYhF {
+  background: var(--cm-raised) !important;
+  color: var(--cm-fg) !important;
+}
+
+.modeSelected_TNyK-N .name_TNyK-N {
+  color: var(--cm-fg) !important;
+}
+
+/* settings: dashboard layout (#131313 sidebar, black content) */
+.sidebar_jnk11m,
+.sidebarRegionScroller_jnk11m {
+  background: var(--cm-surface) !important;
+}
+
+.sidebarRegionScroller_jnk11m {
+  border-right: 1px solid var(--cm-border);
+}
+
+.contentRegion_jnk11m,
+.contentRegionScroller_jnk11m {
+  background: var(--cm-bg) !important;
+}
+
+/* server rail: home / add server stay neutral, icon turns white */
+.circleIconButton_g8YUxD {
+  color: var(--cm-muted) !important;
+}
+
+.circleIconButton_g8YUxD:hover,
+.selected_JJ-hgR .childWrapper_JJ-hgR {
+  background: var(--cm-raised) !important;
+  color: var(--cm-fg) !important;
+}
+
+/* ---- floating things: one surface, strong border, one shadow ---- */
+.menu_M3qk4j {
+  background: var(--cm-surface) !important;
+  border: 1px solid var(--cm-border-strong) !important;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.5) !important;
+}
+
+.menu_M3qk4j [class*="focused_"] {
+  background: var(--cm-raised) !important;
+  color: var(--cm-fg) !important;
+}
+
+.menu_M3qk4j [class*="colorDanger_"][class*="focused_"] {
+  background: rgb(235 64 52 / 0.12) !important;
+  color: var(--cm-danger) !important;
+}
+
+.tooltip_3_v8qp {
+  background: var(--cm-raised) !important;
+  border: 1px solid var(--cm-border-strong);
+  border-radius: 6px;
+  color: var(--cm-fg) !important;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+}
+
+[class*="tooltipPointer"] {
+  display: none;
+}
+
+/* buttons are pills on the site (old + current Discord button classes; the inner layers follow the outer shape) */
+.lookFilled_9OQtot,
+.lookOutlined_9OQtot,
+:is(.primary_F7qvhY, .secondary_F7qvhY, .critical-primary_F7qvhY, .critical-secondary_F7qvhY),
+:is(.primary_F7qvhY, .secondary_F7qvhY, .critical-primary_F7qvhY, .critical-secondary_F7qvhY) .buttonChildrenWrapper_F7qvhY,
+:is(.primary_F7qvhY, .secondary_F7qvhY, .critical-primary_F7qvhY, .critical-secondary_F7qvhY)::before {
+  border-radius: 999px;
+}
+
+.lookFilled_9OQtot,
+.primary_F7qvhY {
+  font-weight: 600;
+}
+
+/* "Add Friend" tab: primary pill with dark text; when open, cyan text on raised instead of a blurple tint */
+.tabBar_zrUwGA .addFriend_zrUwGA.addFriend_zrUwGA.addFriend_zrUwGA {
+  color: var(--cm-on-primary);
+  border-radius: 999px;
+}
+
+.tabBar_zrUwGA .addFriend_zrUwGA.addFriend_zrUwGA.addFriend_zrUwGA[aria-selected="true"] {
+  background: var(--cm-raised);
+  color: var(--cm-primary);
+}

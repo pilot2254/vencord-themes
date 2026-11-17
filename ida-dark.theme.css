@@ -1,0 +1,533 @@
+/**
+ * @name IDA Dark
+ * @author pilot2254
+ * @version 1.0.0
+ * @description Discord as a fresh IDA Pro / Free with the stock "dark" theme: Qt greys, teal buttons, 2px corners, Consolas listing, disassembly colours, navband.
+ */
+
+/*
+ * Values come from IDA's own themes/dark/theme.css (Hex-Rays, based on idaskins-dark):
+ * QWidget #363636 / #ddd, text areas #2d2d2d, borders #474747 (lists #606060), menubar #444, dock title #555,
+ * tabs #555 -> #444 (selected #777), buttons border #077 (hover #0aa, pressed #0ee, default bg #304040),
+ * tooltip #111 with #077 border, menu border #2a2a2a, scrollbar handle #585858, radius 2px,
+ * listing colours from CustomIDAMemo / text_area_t / navband_t.
+ */
+
+:root {
+  --ida-bg: #363636; /* QWidget */
+  --ida-bg-dark: #2d2d2d; /* text areas, listing (line-bg-default) */
+  --ida-menubar: #444;
+  --ida-dock: #555;
+  --ida-tab-sel: #777;
+  --ida-default-btn: #304040;
+  --ida-border: #474747;
+  --ida-border-list: #606060;
+  --ida-menu-border: #2a2a2a;
+  --ida-handle: #585858;
+  --ida-text: #ddd;
+  --ida-line: #aaa; /* line-fg-default */
+  --ida-disabled: #666;
+  --ida-teal-dark: #077;
+  --ida-teal: #0aa;
+  --ida-teal-light: #0ee;
+  --ida-name: #ffd200; /* code name / function name */
+  --ida-import: #ff5afd;
+  --ida-libfunc: #0ff;
+  --ida-register: #73adad;
+  --ida-comment: #5ac35a;
+  --ida-string: #e47251;
+  --ida-number: #d25032;
+  --ida-keyword: #7171ff;
+  --ida-data: #ebebb9;
+  --ida-prefix: #7c7c61; /* data line prefix */
+  --ida-error: #ff3437;
+  --ida-lumina: #32cd32;
+  --ida-highlight: rgb(96 0 96 / 0.8);
+  --ida-selected: #e1ad32;
+  --ida-ui: "Segoe UI", Tahoma, system-ui, sans-serif;
+  --ida-mono: Consolas, "Cascadia Mono", "Courier New", monospace;
+}
+
+body,
+.theme-dark:not(.custom-user-profile-theme),
+.theme-darker:not(.custom-user-profile-theme),
+.theme-midnight:not(.custom-user-profile-theme),
+.theme-light:not(.custom-user-profile-theme) {
+  --font-primary: var(--ida-ui);
+  --font-display: var(--ida-ui);
+  --font-headline: var(--ida-ui);
+  --font-code: var(--ida-mono);
+
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+
+  --app-frame-background: var(--ida-bg);
+  --app-frame-border: var(--ida-border);
+  --background-base-lowest: var(--ida-bg);
+  --background-base-lower: var(--ida-bg-dark);
+  --background-base-low: var(--ida-bg-dark);
+  --background-surface-high: var(--ida-bg);
+  --background-surface-higher: var(--ida-bg);
+  --background-surface-highest: var(--ida-menubar);
+  --background-mod-subtle: rgb(255 255 255 / 0.04);
+  --background-mod-normal: var(--ida-border);
+  --background-mod-strong: var(--ida-handle);
+  --background-brand: var(--ida-default-btn);
+  --background-primary: var(--ida-bg-dark);
+  --background-secondary: var(--ida-bg);
+  --background-floating: var(--ida-bg);
+  --background-code: var(--ida-bg);
+  --background-scrim: rgb(0 0 0 / 0.6);
+  --bg-surface-raised: var(--ida-bg);
+  --chat-background-default: var(--ida-bg-dark);
+  --channeltextarea-background: var(--ida-bg-dark);
+  --home-background: var(--ida-bg-dark);
+  --modal-background: var(--ida-bg);
+  --modal-footer-background: var(--ida-bg);
+  --card-background-default: var(--ida-bg);
+  --user-profile-overlay-background: var(--ida-bg);
+  --embed-background: var(--ida-bg);
+
+  --text-default: var(--ida-text);
+  --text-strong: #fff;
+  --text-subtle: var(--ida-line);
+  --text-muted: var(--ida-disabled);
+  --text-link: var(--ida-libfunc);
+  --text-brand: var(--ida-teal);
+  --text-feedback-positive: var(--ida-lumina);
+  --text-feedback-warning: var(--ida-name);
+  --text-feedback-critical: var(--ida-error);
+  --header-primary: var(--ida-text);
+  --header-secondary: var(--ida-line);
+  --channels-default: var(--ida-line);
+  --channel-icon: #888;
+  --channel-text-area-placeholder: var(--ida-disabled);
+  --chat-text-muted: var(--ida-disabled);
+  --textbox-markdown-syntax: var(--ida-disabled);
+
+  --interactive-text-default: var(--ida-line);
+  --interactive-text-hover: var(--ida-text);
+  --interactive-text-active: #fff;
+  --interactive-icon-default: var(--ida-line);
+  --interactive-icon-hover: var(--ida-text);
+  --interactive-icon-active: #fff;
+  --interactive-muted: #555;
+  --interactive-background-hover: rgb(255 255 255 / 0.05);
+  --interactive-background-active: var(--ida-border);
+  --interactive-background-selected: var(--ida-border); /* QTreeView::item:selected */
+  --interactive-accent-background-hover: rgb(255 255 255 / 0.05);
+  --interactive-accent-background-active: var(--ida-border);
+  --interactive-accent-background-selected: var(--ida-border);
+  --icon-default: var(--ida-line);
+  --icon-subtle: #888;
+  --icon-muted: var(--ida-disabled);
+  --icon-strong: var(--ida-text);
+  --icon-brand: var(--ida-teal);
+
+  --border-subtle: var(--ida-border);
+  --border-muted: var(--ida-border);
+  --border-normal: var(--ida-border);
+  --border-strong: var(--ida-border-list);
+  --border-focus: var(--ida-teal);
+  --focus-primary: var(--ida-teal);
+
+  --blurple-26: var(--ida-teal);
+  --blurple-50: var(--ida-teal);
+  --blurple-60: var(--ida-teal-light);
+  --blurple-65: var(--ida-teal-light);
+  --blurple-50-hsl: 180 100% 33%;
+  --opacity-blurple-8-hsl: 0 0% 100%;
+  --opacity-blurple-12-hsl: 0 0% 100%;
+  --opacity-blurple-16-hsl: 0 0% 100%;
+  --opacity-blurple-24-hsl: 0 0% 100%;
+  --brand-360: var(--ida-teal);
+  --brand-500: var(--ida-teal);
+  --brand-560: var(--ida-teal-light);
+  --control-brand-foreground: var(--ida-teal);
+  --control-brand-foreground-new: var(--ida-teal);
+  --tabs-indicator-default: var(--ida-teal);
+
+  /* QPushButton: no fill, teal border; the default button gets #304040 */
+  --control-primary-background-default: var(--ida-default-btn);
+  --control-primary-background-hover: var(--ida-default-btn);
+  --control-primary-background-active: var(--ida-default-btn);
+  --control-primary-border-default: var(--ida-teal);
+  --control-primary-border-hover: var(--ida-teal-light);
+  --control-primary-border-active: var(--ida-teal-light);
+  --control-primary-text-default: var(--ida-text);
+  --control-primary-text-hover: #fff;
+  --control-primary-text-active: #fff;
+  --control-primary-icon-default: var(--ida-text);
+  --control-primary-icon-hover: #fff;
+  --control-secondary-background-default: var(--ida-bg);
+  --control-secondary-background-hover: var(--ida-bg);
+  --control-secondary-background-active: var(--ida-bg);
+  --control-secondary-border-default: var(--ida-teal-dark);
+  --control-secondary-border-hover: var(--ida-teal);
+  --control-secondary-border-active: var(--ida-teal-light);
+  --control-secondary-text-default: var(--ida-text);
+  --control-secondary-text-hover: var(--ida-text);
+  --control-secondary-icon-default: var(--ida-text);
+  --control-critical-primary-background-default: #4a2222;
+  --control-critical-primary-background-hover: #5a2626;
+  --control-critical-primary-background-active: #5a2626;
+  --control-critical-primary-border-default: var(--ida-error);
+  --control-critical-primary-text-default: var(--ida-text);
+  --control-critical-secondary-background-default: var(--ida-bg);
+  --control-critical-secondary-border-default: var(--ida-error);
+  --control-critical-secondary-text-default: var(--ida-error);
+  --control-connect-background-default: var(--ida-default-btn);
+  --control-connect-background-hover: var(--ida-default-btn);
+  --control-connect-border-default: var(--ida-lumina);
+  --control-connect-text-default: var(--ida-text);
+  --control-icon-only-background-hover: rgb(255 255 255 / 0.06);
+  --button-filled-brand-background: var(--ida-default-btn);
+  --button-filled-brand-background-hover: var(--ida-default-btn);
+  --button-filled-brand-text: var(--ida-text);
+  --button-secondary-background: var(--ida-bg);
+  --redesign-button-secondary-background: var(--ida-bg);
+  --redesign-button-secondary-text: var(--ida-text);
+
+  --switch-background-default: var(--ida-bg-dark);
+  --switch-background-selected-default: var(--ida-default-btn);
+  --switch-background-selected-hover: var(--ida-default-btn);
+  --switch-border-default: var(--ida-border);
+  --switch-border-hover: var(--ida-teal);
+  --switch-border-selected-default: var(--ida-teal);
+  --switch-border-selected-hover: var(--ida-teal-light);
+  --switch-thumb-background-default: var(--ida-handle);
+  --switch-thumb-background-selected-default: var(--ida-teal-light);
+  --switch-thumb-icon-active: var(--ida-default-btn);
+  --checkbox-background-default: var(--ida-bg-dark);
+  --checkbox-background-selected-default: var(--ida-default-btn);
+  --checkbox-border-default: var(--ida-border-list);
+  --checkbox-border-hover: var(--ida-teal);
+  --checkbox-border-selected-default: var(--ida-teal);
+  --radio-background-default: var(--ida-bg-dark);
+  --radio-background-selected-default: var(--ida-default-btn);
+  --radio-border-default: var(--ida-border-list);
+  --radio-border-selected-default: var(--ida-teal);
+  --slider-track-background: var(--ida-border);
+  --progressbar-track-background: var(--ida-border);
+  --progressbar-indicator-background: var(--ida-teal);
+
+  --input-background-default: var(--ida-bg-dark);
+  --input-border-default: var(--ida-border);
+  --input-border-hover: var(--ida-teal);
+  --input-border-active: var(--ida-teal);
+  --input-text-default: var(--ida-text);
+  --input-placeholder-text-default: var(--ida-disabled);
+
+  --message-background-hover: rgb(255 255 255 / 0.03);
+  --message-highlight-background-default: rgb(96 0 96 / 0.25);
+  --message-highlight-background-hover: rgb(96 0 96 / 0.32);
+  --message-mentioned-background-default: rgb(96 0 96 / 0.35);
+  --message-mentioned-background-hover: rgb(96 0 96 / 0.45);
+  --mention-foreground: #ffaaff;
+  --mention-background: var(--ida-highlight);
+  --reaction-background-default: var(--ida-bg);
+  --reaction-background-hover: var(--ida-bg);
+  --reaction-background-reacted-default: var(--ida-default-btn);
+  --reaction-background-reacted-hover: var(--ida-default-btn);
+  --reaction-border-default: var(--ida-border);
+  --reaction-border-hover: var(--ida-teal);
+  --reaction-border-reacted-default: var(--ida-teal);
+  --reaction-text-default: var(--ida-line);
+  --reaction-text-reacted-default: var(--ida-text);
+
+  --badge-background-default: var(--ida-default-btn);
+  --badge-text-default: var(--ida-teal-light);
+  --badge-primary-background: var(--ida-default-btn);
+  --badge-notification-background: #ca0000;
+
+  --status-online: var(--ida-lumina);
+  --status-idle: var(--ida-name);
+  --status-dnd: var(--ida-error);
+  --status-offline: var(--ida-disabled);
+  --status-positive: var(--ida-lumina);
+  --status-warning: var(--ida-name);
+  --status-danger: #ca0000;
+  --status-speaking: var(--ida-lumina);
+
+  --scrollbar-thin-thumb: var(--ida-handle);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: var(--ida-handle);
+  --scrollbar-auto-track: var(--ida-bg);
+}
+
+::selection {
+  background: var(--ida-selected); /* line-bg-selected */
+  color: #000;
+}
+
+[role="textbox"] {
+  caret-color: #fff;
+}
+
+/* ---- menubar (QMenuBar #444) with IDA's menus in place of the back/forward arrows ---- */
+.bar_3zSH5d {
+  background: var(--ida-menubar);
+  border-bottom: 1px solid var(--ida-menu-border);
+}
+
+.bar_3zSH5d .backForwardButtons_nS9Yqn {
+  display: none;
+}
+
+.bar_3zSH5d::before {
+  content: "File Edit Jump Search View Debugger Lumina Options Windows Help";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  height: var(--custom-app-top-bar-height, 32px);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  word-spacing: 11px;
+  font: 400 12px var(--ida-ui);
+  color: var(--ida-text);
+  pointer-events: none;
+}
+
+.title_3zSH5d {
+  color: var(--ida-line);
+  font-weight: 400;
+}
+
+/* ---- dock titles: channel header = "IDA View-A" tab (#555 -> #444 gradient) ---- */
+.subtitleContainer_z_gUBg,
+.title_z_gUBg {
+  background: linear-gradient(var(--ida-dock), var(--ida-menubar)) !important;
+}
+
+.title_z_gUBg h1,
+.title_z_gUBg h2 {
+  font-weight: 400;
+}
+
+/* ---- listing: messages in Consolas like the disassembly view ---- */
+.chatContent_z_gUBg {
+  background: var(--ida-bg-dark) !important;
+}
+
+/* navband: the coloured strip over the listing (lib func, function, code, data, unexplored, extern, cursor) */
+.chatContent_z_gUBg::before {
+  content: "";
+  display: block;
+  flex: none;
+  height: 9px;
+  margin: 3px 4px;
+  border: 1px solid var(--ida-border);
+  background: linear-gradient(90deg,
+    #00aaff 0 6%, #ffaa00 6% 23%, #800000 23% 25%, #ffaa00 25% 37%, #80ff00 37% 37.4%, #ffaa00 37.4% 52%,
+    #00aaff 52% 55%, #ffaa00 55% 61%, #ebebb9 61% 74%, #787800 74% 86%, #ebebb9 86% 92%, #ff00ff 92% 96%, #4a4a4a 96%);
+}
+
+.messagesWrapper_8AE1Qq,
+.scroller_8AE1Qq,
+.wrapper_oQjLgZ {
+  background: transparent !important;
+}
+
+[id^="message-content-"] {
+  font-family: var(--ida-mono);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ida-text);
+}
+
+/* usernames without a role colour: function-name yellow */
+[id^="message-username-"] > span:not([style]) {
+  color: var(--ida-name);
+}
+
+[id^="message-username-"] {
+  font-family: var(--ida-mono);
+  font-weight: 400;
+}
+
+/* timestamps: line prefix, like ".text:00401000" */
+time {
+  font-family: var(--ida-mono);
+  color: var(--ida-prefix);
+}
+
+/* (edited) = automatic comment grey */
+[class*="edited_"] {
+  color: var(--ida-disabled);
+}
+
+/* mentions: highlighted identifier (purple bg, unknown-name pink) */
+.mention {
+  border-radius: 0;
+  font-family: var(--ida-mono);
+}
+
+.mention.interactive:hover {
+  background: rgb(150 0 150 / 0.85) !important;
+  color: #fff !important;
+}
+
+.message_SY_P2T.mentioned_SY_P2T::before,
+.replying_SY_P2T::before {
+  width: 3px;
+  background: #ff00ff;
+}
+
+/* links = library functions (cyan), no underline until hover */
+[id^="message-content-"] a {
+  color: var(--ida-libfunc);
+}
+
+/* blockquotes read like comments */
+[class*="blockquoteContainer_"] {
+  color: var(--ida-comment);
+}
+
+[class*="blockquoteDivider_"] {
+  background: var(--ida-comment);
+  border-radius: 0;
+}
+
+/* code: strings orange, block code on the widget grey with the text_area_t syntax colours */
+code.inline {
+  background: var(--ida-bg) !important;
+  color: var(--ida-string);
+  border: 1px solid var(--ida-border);
+  border-radius: 0;
+}
+
+.hljs {
+  background: var(--ida-bg) !important;
+  border: 1px solid var(--ida-border) !important;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.hljs-keyword, .hljs-meta, .hljs-selector-tag { color: #7171ff; }
+.hljs-literal, .hljs-symbol { color: #c728c7; }
+.hljs-string, .hljs-attr { color: #e47251; }
+.hljs-comment, .hljs-quote { color: #5ac35a; }
+.hljs-number { color: #d25032; }
+.hljs-title, .hljs-function, .hljs-section { color: #ffd200; }
+.hljs-built_in, .hljs-type { color: #73adad; }
+.hljs-variable, .hljs-params { color: #ff8000; }
+
+/* embeds: QGroupBox */
+.embedFull_XyW1ZT {
+  background: var(--ida-bg) !important;
+  border: 1px solid var(--ida-border-list);
+  border-left-width: 3px;
+  border-top-color: var(--ida-border-list) !important;
+  border-right-color: var(--ida-border-list) !important;
+  border-bottom-color: var(--ida-border-list) !important;
+  border-radius: 2px;
+}
+
+/* composer: a QLineEdit (border #474747, teal on hover/focus) */
+.channelTextArea_z_gUBg {
+  background: var(--ida-bg-dark);
+  border: 1px solid var(--ida-border);
+  border-radius: 2px;
+}
+
+.channelTextArea_z_gUBg:hover,
+.channelTextArea_z_gUBg:focus-within {
+  border-color: var(--ida-teal);
+}
+
+.form_z_gUBg .themedBackground_2x8-Qn,
+.attachWrapper_7TM4SO {
+  background: none !important;
+  border: 0 !important;
+}
+
+[class*="slateTextArea_"] {
+  font-family: var(--ida-mono);
+}
+
+/* ---- side lists: categories and role groups as quiet dim mono text ---- */
+li[class*="containerDefault_"] h3,
+.membersGroup_86es0b {
+  font-family: var(--ida-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #8a8a8a;
+}
+
+.wrapper_TNyK-N .link_TNyK-N {
+  border-radius: 0;
+}
+
+.modeSelected_TNyK-N .link_TNyK-N {
+  background: var(--ida-border) !important;
+}
+
+.modeSelected_TNyK-N .name_TNyK-N {
+  color: var(--ida-text) !important;
+}
+
+.name_XH4OpX {
+  font-weight: 600;
+}
+
+/* ---- floating: QMenu, QToolTip ---- */
+.menu_M3qk4j {
+  background: var(--ida-bg) !important;
+  border: 1px solid var(--ida-menu-border) !important;
+  border-radius: 0;
+  box-shadow: 2px 2px 6px rgb(0 0 0 / 0.5) !important;
+}
+
+.menu_M3qk4j [class*="focused_"] {
+  background: var(--ida-menu-border) !important;
+  color: #fff !important;
+}
+
+.menu_M3qk4j [class*="colorDanger_"][class*="focused_"] {
+  color: var(--ida-error) !important;
+}
+
+.tooltip_3_v8qp {
+  background: #111 !important;
+  border: 1px solid var(--ida-teal-dark);
+  border-radius: 2px;
+  color: var(--ida-text) !important;
+  font-weight: 400;
+  box-shadow: none;
+}
+
+[class*="tooltipPointer"] {
+  display: none;
+}
+
+/* ---- buttons: QPushButton (2px, teal border) ---- */
+.lookFilled_9OQtot,
+.lookOutlined_9OQtot,
+:is(.primary_F7qvhY, .secondary_F7qvhY, .critical-primary_F7qvhY, .critical-secondary_F7qvhY),
+:is(.primary_F7qvhY, .secondary_F7qvhY, .critical-primary_F7qvhY, .critical-secondary_F7qvhY) .buttonChildrenWrapper_F7qvhY {
+  border-radius: 2px;
+  font-weight: 400;
+}
+
+.tabBar_zrUwGA .addFriend_zrUwGA.addFriend_zrUwGA.addFriend_zrUwGA {
+  background: var(--ida-default-btn);
+  border: 1px solid var(--ida-teal);
+  color: var(--ida-text);
+  border-radius: 2px;
+}
+
+.tabBar_zrUwGA .addFriend_zrUwGA.addFriend_zrUwGA.addFriend_zrUwGA[aria-selected="true"] {
+  background: var(--ida-tab-sel);
+  color: #fff;
+}
+
+/* reactions: square chips */
+.reaction_MmKct8 {
+  border-radius: 2px !important;
+}
